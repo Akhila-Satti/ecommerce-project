@@ -1,16 +1,15 @@
-import { it, expect, describe, vi ,beforeEach} from "vitest";
+import { it, expect, describe, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Product } from "./Product";
 import userEvent from "@testing-library/user-event";
 import axios from "axios";
 vi.mock("axios");
 describe("Product component", () => {
-    let product;
-    let loadCart;
-    beforeEach(()=>{
-        product={
-
-            id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+  let product;
+  let loadCart;
+  beforeEach(() => {
+    product = {
+      id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       image: "images/products/athletic-cotton-socks-6-pairs.jpg",
       name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
       rating: {
@@ -19,11 +18,10 @@ describe("Product component", () => {
       },
       priceCents: 1090,
       keywords: ["socks", "sports", "apparel"],
-        };
-        loadCart=vi.fn();
-    })
+    };
+    loadCart = vi.fn();
+  });
   it("displays the product details correctly", () => {
-    
     render(<Product product={product} loadCart={loadCart} />);
     expect(
       screen.getByText("Black and Gray Athletic Cotton Socks - 6 Pairs"),
@@ -40,7 +38,6 @@ describe("Product component", () => {
     expect(screen.getByText("87")).toBeInTheDocument();
   });
   it("adds a product to the cart ", async () => {
-   
     render(<Product product={product} loadCart={loadCart} />);
 
     const user = userEvent.setup();
